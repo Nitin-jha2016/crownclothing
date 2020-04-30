@@ -7,6 +7,7 @@ import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ currentUser }) => (
   <div className="header">
+    {currentUser ? <div>value true</div> : <div> false value</div>}
     <Link to="/" className="logo-container">
       <Logo className="logo" />
     </Link>
@@ -31,7 +32,9 @@ const Header = ({ currentUser }) => (
 );
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.user.currentUser };
+  return {
+    currentUser: state.user.currentUser,
+  };
 };
 
 export default connect(mapStateToProps)(Header);

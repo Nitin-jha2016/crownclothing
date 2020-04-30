@@ -27,7 +27,7 @@ class App extends Component {
           // console.log("user  got ", this.state.currentUser);
         });
       }
-      setCurrentUser({ userAuth });
+      setCurrentUser(userAuth);
     });
   }
   componentWillUnmount() {
