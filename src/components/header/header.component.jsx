@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 import "./header.styles.scss";
+import { createStructuredSelector } from "reselect";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+import { selectCurrentUser } from "../../redux/user/userSelector";
+import { selectCartHidden } from "../../redux/cart/cart.selector";
+
 const Header = ({ currentUser, hiddenValue }) => (
   <div className="header">
     {/* {currentUser ? <div>value true</div> : <div> false value</div>} */}
@@ -35,12 +40,11 @@ const Header = ({ currentUser, hiddenValue }) => (
 );
 
 // const mapStateToProps = (state) => { lets do destructuring here
-const mapStateToProps = ({ user: { currentUser }, cart: { hiddenValue } }) => {
-  return {
-    // currentUser: state.user.currentUser,
-    currentUser,
-    hiddenValue,
-  };
-};
+// const mapStateToProps = ({ user: { currentUser }, cart: { hiddenValue } }) => {
+const mapStateToProps = createStructuredSelector({
+  // currentUser: state.user.currentUser,
+  currentUser: selectCurrentUser,
+  hiddenValue: selectCartHidden,
+});
 
 export default connect(mapStateToProps)(Header);
