@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
 import { auth } from "../../firebase/firebase.utils";
-
-const Header = ({ currentUser }) => (
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+const Header = ({ currentUser, hiddenValue }) => (
   <div className="header">
     {/* {currentUser ? <div>value true</div> : <div> false value</div>} */}
     <Link to="/" className="logo-container">
@@ -27,13 +28,18 @@ const Header = ({ currentUser }) => (
           SIGN IN
         </Link>
       )}
+      <CartIcon />
     </div>
+    {hiddenValue ? null : <CartDropDown />}
   </div>
 );
 
-const mapStateToProps = (state) => {
+// const mapStateToProps = (state) => { lets do destructuring here
+const mapStateToProps = ({ user: { currentUser }, cart: { hiddenValue } }) => {
   return {
-    currentUser: state.user.currentUser,
+    // currentUser: state.user.currentUser,
+    currentUser,
+    hiddenValue,
   };
 };
 
