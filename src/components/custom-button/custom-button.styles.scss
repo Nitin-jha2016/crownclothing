@@ -14,8 +14,9 @@
   border: none;
   cursor: pointer;
   align-items: center;
-  justify-content: center;
+  justify-content: center space-between;
   text-align: center;
+  margin: 5px 5px;
 
   &:hover {
     background-color: white;
