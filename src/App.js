@@ -4,7 +4,10 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-sign-up/signin-sign-up.component";
-import { auth } from "./components/firebase/firebase-utils";
+import {
+  auth,
+  createUserProfileDocument,
+} from "./components/firebase/firebase-utils";
 
 import "./App.css";
 class App extends Component {
@@ -14,9 +17,11 @@ class App extends Component {
   }
   unsubscribeFromAuth = null;
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
-      console.log(this.state.currentUser);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      console.log(user);
+      createUserProfileDocument(user);
+      // this.setState({ currentUser: user });
+      // console.log(this.state.currentUser);
     });
   }
   //if window close then close session as well
