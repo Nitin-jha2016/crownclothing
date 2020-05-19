@@ -17,7 +17,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return; // if user doesnt exist return simply
   const userRef = firestore.doc(`users/${userAuth.uid}`); // find user in firestore
   const snapshot = await userRef.get();
-  console.log("snap shot", snapshot);
+  // console.log("snap shot", snapshot);
   if (!snapshot.exists) {
     // if aentry doesnt existing in firestore
     const { displayName, email } = userAuth; //getting values from  userAuth this is bi default property of userAuth

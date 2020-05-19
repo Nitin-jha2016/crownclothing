@@ -17,11 +17,25 @@ class App extends Component {
   }
   unsubscribeFromAuth = null;
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      console.log(user);
-      createUserProfileDocument(user);
-      // this.setState({ currentUser: user });
-      // console.log(this.state.currentUser);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      console.log("User exist ?? ", userAuth);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth); // it check if user is signed in or singout (null)
+        console.log(" reference at firestore Now ", userRef);
+        userRef.onSnapshot((snapShot) => {
+          // it will take snapshot of that useref data and tell if it exist is true or false and snapshot.date() wont give u id only
+          // give u data
+          console.log("data is ", snapShot.id, "  ", snapShot.data());
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
+        // console.log(this.state.currentUser);
+      }
+      this.setState({ currentUser: userAuth }); //it means it is null
     });
   }
   //if window close then close session as well
