@@ -1,6 +1,7 @@
 import React from "react";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
+import { connect } from "react-redux"; // it is HOC which help to connect redux
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase-utils";
 
@@ -32,4 +33,9 @@ const Header = ({ currentUser }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentUser: state.user.currentUser,
+  };
+};
+export default connect(mapStateToProps)(Header);

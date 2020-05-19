@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <div>
         {/* Now inside header for sign out and sign in i have to pass current user status pass null or object */}
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
