@@ -5,6 +5,7 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import { connect } from "react-redux"; // it is HOC which help to connect redux
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase-utils";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = ({ currentUser }) => {
   return (
@@ -31,6 +32,7 @@ const Header = ({ currentUser }) => {
         )}
         <CartIcon />
       </div>
+      <CartDropDown /> {/* // we place this out side the options div */}
     </div>
   );
 };
