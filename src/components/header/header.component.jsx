@@ -1,4 +1,5 @@
 import React from "react";
+import { createStructuredSelector } from "reselect";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -6,6 +7,8 @@ import { connect } from "react-redux"; // it is HOC which help to connect redux
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase-utils";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
 
 const Header = ({ currentUser, hidden }) => {
   return (
@@ -39,14 +42,17 @@ const Header = ({ currentUser, hidden }) => {
 };
 
 // const mapStateToProps = (state, ownProps) => {  lets destructure this now
-const mapStateToProps = (
-  { user: { currentUser }, cart: { hidden } },
-  ownProps
-) => {
-  return {
-    // currentUser: state.user.currentUser,
-    currentUser,
-    hidden,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     // currentUser: state.user.currentUser,
+//     currentUser: selectCurrentUser(state),
+//     hidden: selectCartHidden(state),
+//   };
+//  or do belo as well};
+const mapStateToProps = createStructuredSelector({
+  //it pass state itself
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
+});
+
 export default connect(mapStateToProps)(Header);
