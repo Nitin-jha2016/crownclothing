@@ -15,6 +15,11 @@ export const selectCollections = createSelector(
   [selectStop],
   (shop) => shop.collections
 );
+//get all keys in an object
+export const selectCollectionForPreview = createSelector(
+  [selectCollections],
+  (collections) => Object.keys(collections).map((key) => collections[key])
+);
 
 export const selectCollection = (collectionUrlParam) =>
   createSelector(
